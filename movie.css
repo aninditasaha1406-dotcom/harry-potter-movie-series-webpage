@@ -1,0 +1,321 @@
+/* ===========================
+   Base / Fonts / Colors
+   =========================== */
+:root{
+  --bg:#060506;
+  --muted:#e8e0c9;
+  --gold:#d9b86d;
+  --gry:#7e0909;
+  --sly:#0b6a32;
+  --rav:#163478;
+  --huf:#d1a20a;
+  --cre: #c40ad1;
+  --mist-opacity:.40;
+  --max-width:1100px;
+  --panel: rgba(20,20,20,0.6);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background: radial-gradient(ellipse at top, #0a0a0c 0%, #050506 60%), var(--bg);
+  color:var(--muted);
+  font-family: "EB Garamond", serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------------------------
+   PARCHMENT NAV
+   --------------------------- */
+.parchment-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.1rem;
+  padding: .8rem 1rem;
+
+  /* Correct path to parchment image (relative to CSS folder) */
+  background: url('../images/parchmentTexture.png') center/cover no-repeat;
+  background-color: rgba(255, 255, 255, 0.85); /* light base over parchment */
+  background-blend-mode: multiply;
+
+  border-bottom: 4px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+
+  font-family: "Cinzel Decorative", serif;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.parchment-nav a {
+  color: #3d2b18;
+  text-decoration: none;
+  padding: .35rem .9rem;
+  border-radius: 6px;
+  transition: all .18s ease;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.parchment-nav a:hover {
+  color: var(--gold);
+  transform: translateY(-2px);
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+}
+
+
+/* ---------------------------
+   HERO
+   --------------------------- */
+.hero{
+  position:relative;
+  min-height:70vh;
+  background: center/cover no-repeat url('../images/hogwarts-night.jpg');
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:2.5rem 1rem;
+  overflow:hidden;
+}
+.hero-inner{
+  display:flex;
+  gap:2rem;
+  align-items:center;
+  max-width:var(--max-width);
+  width:100%;
+  z-index:3;
+}
+.thumb{
+  width:160px;
+  height:240px;
+  object-fit:cover;
+  border-radius:8px;
+  border:4px solid rgba(0,0,0,0.5);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.8), 0 0 18px rgba(212,175,55,0.12);
+  animation: gentleFloat 6s ease-in-out infinite;
+}
+@keyframes gentleFloat{
+  0%{ transform: translateY(0) }
+  50%{ transform: translateY(-6px) }
+  100%{ transform: translateY(0) }
+}
+.hp-title{
+  font-family: "Cinzel Decorative", serif;
+  font-size:4rem;
+  color:var(--gold);
+  margin:0;
+  letter-spacing:.6px;
+  text-shadow: 0 6px 30px rgba(212,175,55,0.35), 0 0 30px rgba(0,0,0,0.6);
+  line-height:1;
+}
+.hero-sub{ margin-top:.6rem; color:#d9cfb1; font-size:1rem; }
+.hero-subsmall{ color:#cfc3a3; font-size:.9rem; margin-top:.4rem; }
+
+/* ---------------------------
+   MIST
+   --------------------------- */
+.mist{
+  pointer-events:none;
+  position:absolute;
+  inset:0;
+  background-image:url('../images/mist.png');
+  opacity:var(--mist-opacity);
+  mix-blend-mode:screen;
+  animation: drift 70s linear infinite;
+  transform: translateZ(0);
+  z-index:2;
+}
+@keyframes drift{
+  from{ background-position:0 0 }
+  to{ background-position:2000px 0 }
+}
+
+/* ---------------------------
+   SECTION BASE
+   --------------------------- */
+.section{
+  padding:3rem 1rem;
+  max-width:var(--max-width);
+  margin:0 auto;
+}
+.section-title{
+  text-align:center;
+  color:var(--gold);
+  font-family:"Cinzel Decorative", serif;
+  font-size:1.6rem;
+  margin-bottom:1rem;
+  text-shadow:0 4px 12px rgba(0,0,0,0.6);
+}
+
+/* ---------------------------
+   SCROLL / SYNOPSIS
+   --------------------------- */
+.scroll{
+  background: url('../images/parchment-texture.jpg') center/cover;
+  padding:1.6rem;
+  border:4px solid rgba(180,138,69,0.95);
+  border-radius:8px;
+  box-shadow: inset 0 6px 30px rgba(0,0,0,0.5), 0 12px 40px rgba(0,0,0,0.6);
+  color:#efe7cf;
+  line-height:1.55;
+  font-size:1rem;
+}
+
+/* ---------------------------
+   CHARACTERS GRID & CARDS
+   --------------------------- */
+.char-grid, .char-grid .character-card, .character-grid { }
+.char-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap:1rem;
+}
+.character-card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(6,6,6,0.25));
+  padding:1rem;
+  border-radius:10px;
+  text-align:center;
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.character-card img{ width:100%; height:240px; object-fit:cover; border-radius:8px; margin-bottom:.6rem; }
+.character-card h4{ margin:.2rem 0 .5rem 0; color:var(--gold); font-size:1.05rem; }
+.character-card p{ color:#e7dfc1; font-size:0.95rem; line-height:1.35; }
+.character-card:hover{ transform: translateY(-8px); box-shadow:0 26px 60px rgba(0,0,0,0.7); }
+
+/* house borders */
+.character-card.gryffindor{ border:5px solid var(--gry); box-shadow:0 8px 26px rgba(126,9,9,0.08); }
+.character-card.slytherin{ border:5px solid var(--sly); box-shadow:0 8px 26px rgba(11,106,50,0.08); }
+.character-card.ravenclaw{ border:5px solid var(--rav); box-shadow:0 8px 26px rgba(22,52,120,0.08); }
+.character-card.hufflepuff{ border:5px solid var(--huf); box-shadow:0 8px 26px rgba(209,162,10,0.08); }
+.character-card.creature{ border:5px solid var(--cre); box-shadow:0 8px 26px rgba(196, 10, 209, 0.08); }
+
+.house-label {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  font-size: 0.9rem;
+  color: #333; /* or any text color */
+  gap: 0.5em;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* House colors */
+.dot.gryffindor {
+  background-color: #ae0001; /* Gryffindor Red */
+}
+
+.dot.slytherin {
+  background-color: #2a623d; /* Slytherin Green */
+}
+
+.dot.ravenclaw {
+  background-color: #222f5b; /* Ravenclaw Blue */
+}
+
+.dot.hufflepuff {
+  background-color: #ecb939; /* Hufflepuff Yellow */
+}
+
+.dot.creature {
+  background-color: #c40ad1; /* Gray for creatures */
+}
+
+
+/* ---------------------------
+   MOVIES GRID
+   --------------------------- */
+.movie-grid{ display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+.movie{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(9,9,9,0.25));
+  padding:1rem;
+  border-radius:8px;
+  border:1px solid rgba(212,175,55,0.06);
+  box-shadow:0 10px 30px rgba(0,0,0,0.6);
+}
+.movie img{ width:100%; height:360px; object-fit:cover; border-radius:6px; margin-bottom:.6rem; }
+.movie h3{ color:var(--gold); margin:0 0 .4rem 0; font-size:1.05rem; }
+.movie p{ color:#e9e0c6; line-height:1.45; font-size:0.95rem; }
+
+/* small meta lines */
+.movie p strong{ color:#f3e7c1 }
+
+/* ---------------------------
+   GALLERY
+   --------------------------- */
+.gallery-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:10px; align-items:center; }
+.gallery-grid img{ width:80%; height:250px; object-fit:cover; border-radius:6px; box-shadow:0 6px 18px rgba(0,0,0,0.6); }
+
+/* ---------------------------
+   TRAILER FRAME (enchanted)
+   --------------------------- */
+.trailer-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.trailer-container video {
+    max-width: 100%;
+    border: 6px solid rgba(255, 215, 0, 0.8); /* golden border */
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.enchanted-frame iframe{ width:100%; height:480px; border:0; border-radius:6px; }
+
+/* ---------------------------
+   REVIEWS GRID
+   --------------------------- */
+.reviews-grid{ display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.review-card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(6,6,6,0.22));
+  padding:1rem;
+  border-radius:8px;
+  text-align:left;
+}
+.stars{ color:var(--gold); font-weight:bold; margin-top:.5rem; }
+
+/* ---------------------------
+   CREATORS GRID
+   --------------------------- */
+.creators-grid{ display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items:start; }
+.creator-card{ background:var(--panel); padding:1rem; border-radius:8px; text-align:center; }
+.creator-card img{ width:100%; height:320px; object-fit:cover; border-radius:8px; margin-bottom:.6rem; }
+.creator-card h4{ color:var(--gold); margin:0 0 .3rem 0; }
+
+/* ---------------------------
+   FOOTER: candles + symbols
+   --------------------------- */
+.site-footer, .footer-inner { padding:2rem 1rem; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(2,2,2,0.9)); text-align:center; color:#cfc8a6; }
+.footer-inner{ max-width:var(--max-width); margin:0 auto; }
+.symbols{ font-size:1.6rem; margin-bottom:.6rem; display:block; }
+.candles{ font-size:1.6rem; margin-bottom:.6rem; }
+.candle{ display:inline-block; margin:0 .25rem; animation:candleFlicker 2s infinite; }
+@keyframes candleFlicker{
+  0%{ transform: translateY(0); opacity:1; filter:brightness(1); }
+  50%{ transform: translateY(-3px); opacity:.7; filter:brightness(1.25); }
+  100%{ transform: translateY(0); opacity:1; filter:brightness(1); }
+}
+.wb{ width:84px; margin-top:.6rem; opacity:.95; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.6)); }
+.small{ font-size:.88rem; color:#c9c1a0 }
+
+/* ---------------------------
+   Responsive tweaks
+   --------------------------- */
+@media (max-width:900px){
+  .hero-inner{ flex-direction:column; align-items:center; text-align:center; gap:1rem; }
+  .hp-title{ font-size:2.6rem; }
+  .enchant-frame iframe{ height:360px; }
+}
+@media (max-width:520px){
+  .parchment-nav{ gap:.6rem; padding:.6rem; font-size:.95rem }
+  .movie img{ height:220px }
+  .enchant-frame iframe{ height:220px }
+}
